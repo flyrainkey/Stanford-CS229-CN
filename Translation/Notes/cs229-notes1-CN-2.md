@@ -1,6 +1,6 @@
 ---
 layout: page
-permalink: translation/cs229-notes1-cn-2
+permalink: /translation/cs229-notes1-cn-2
 ---
 
 原文：http://cs229.stanford.edu/notes/cs229-notes1.pdf  
