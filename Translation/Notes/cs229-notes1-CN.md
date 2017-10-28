@@ -1,6 +1,6 @@
 ---
 layout: page
-permalink: /translation/cs229-notes1-cn
+permalink: /translation/cs229-notes1-cn/
 ---
 
 原文：http://cs229.stanford.edu/notes/cs229-notes1.pdf  
@@ -207,13 +207,13 @@ $$ y^{(i)} = \theta^Tx^{(i)}+\epsilon^{(i)} $$
 
 上面的 $\epsilon^{(i)} $ 是误差项，用于考虑建模时忽略的变量所产生的影响（ 比如可能某些特征对于房价的影响很明显，但我们做回归的时候忽略掉了）或者随机的噪声（random noise）。让我们进一步假设 $\epsilon^{(i)} $ 是独立同分布的 （IID ，independently and identically distributed） ，服从高斯分布（Gaussian distribution ，也叫正态分布 Normal distribution），其平均值为 0，方差（variance）为 $\sigma^2$。据此， $\epsilon^{(i)} $ 的概率密度函数可以写成：  
 
-$$p(\epsilon^{(i)})=\frac{1}{\sqrt {2\pi}\sigma}exp(-\frac{(\epsilon{(i)})^2}{2\sigma^2})$$
+$$p(\epsilon^{(i)})=\frac{1}{\sqrt {2\pi}\sigma}\exp (-\frac{(\epsilon{(i)})^2}{2\sigma^2})$$
 
 这意味着存在下面的等量关系：  
 
-$$p(y^{(i)}\mid x^{(i)};\theta)=\frac{1}{\sqrt {2\pi}\sigma} exp(- \frac {(y^{(i)}-\theta^Tx^{(i)})^2} {2\sigma^2})$$
+$$p(y^{(i)}\mid x^{(i)};\theta)=\frac{1}{\sqrt {2\pi}\sigma} \exp (- \frac {(y^{(i)}-\theta^Tx^{(i)})^2} {2\sigma^2})$$
 
-这里的记号 ”$p(y^{(i)}\mid x^{(i)};\theta)$“ 表示的是这是一个以及给定 $ x^{(i)} $ 的 $y^{(i)} $ 的分布，并且由 $\theta$ 参数化。注意我们这里不能将使用条件 $\theta (p(y^{(i)}\mid x^{(i)},\theta))$ ，因为 $\theta$ 并不是一个随机变量。此处 $y^{(i)}$ 的分布还可以写成 $y^{(i)} \mid x^{(i)};\theta \sim \cal N(\theta^Tx^{(i)},\sigma^2)$.
+这里的记号 ”$p(y^{(i)}\mid x^{(i)};\theta)​$“ 表示的是这是一个以及给定 $ x^{(i)} ​$ 的 $y^{(i)} ​$ 的分布，并且由 $\theta​$ 参数化。注意我们这里不能将使用条件 $\theta (p(y^{(i)}\mid x^{(i)},\theta))​$ ，因为 $\theta​$ 并不是一个随机变量。此处 $y^{(i)}​$ 的分布还可以写成 $y^{(i)} \mid x^{(i)};\theta \sim \cal N(\theta^Tx^{(i)},\sigma^2)​$.
 
 给定设计矩阵$ X​$ （包含了所有的 $x^{(i)}​$）和 $\theta​$， 那么$y^{(i)}​$ 的分布是什么？数据的概率以 $p(\overset{\rightarrow}y \mid X;\theta)​$ 的形式给出。当 $\theta​$ 取固定值的时候，这经常被看作是一个关于 $\overset{\rightarrow}y​$ （或者是 $X​$ ）的函数。当我们想要显式地把它看做一个关于 $\theta​$  的函数时，我们称之为 **似然（likelihood）** 函数：  
 
@@ -259,9 +259,9 @@ $$ \frac {1}{2} \sum_{i=1}^{m} {(h_\theta(x^{(i)})-y^{(i)})^2} $$
 
 对于权值的选取可以使用下面这个比较标准的公式：  
 
-$$ w^{(i)}=exp(-\frac {(x^{(i)}-x)^2}{2\tau^2}) $$
+$$ w^{(i)}=\exp (-\frac {(x^{(i)}-x)^2}{2\tau^2}) $$
 
-（如果 $x$ 是向量值，上面的式子需要写成广义形式，即 $w^{(i)}=exp(-(x^{(i)}-x)^T(x^{(i)}-x)/2\tau^2)$，并根据情况选择 $\tau$ 或者 $\sum$。)
+（如果 $x$ 是向量值，上面的式子需要写成广义形式，即 $w^{(i)}=\exp (-(x^{(i)}-x)^T(x^{(i)}-x)/2\tau^2)$，并根据情况选择 $\tau$ 或者 $\sum$。)
 
 注意，权重取决于特定的点 $x$， 而我们又尝试去预测 $x$。此外，如果 $\mid x^{(i)}-x \mid$ 很小，那么 $w^{(i)}$ 将接近 1；如果 $\mid x^{(i)}-x \mid$ 很大，那么 $w^{(i)}$ 将非常小。其直观意义就是越是靠近预测点的样本点，它们对预测点的影响就应该越大，越是远离预测点的样本点，它们对预测点的影响就越小，也就是说**局部加权线性回归模型**只关注于预测点附近的点（这就是局部的含义），而不考虑其他远离预测点的样本点。（注意，权值公式看上去类似于高斯分布的密度，但 $w^{(i)}$ 和高斯分布没有任何关系，尤其注意 $w^{(i)}$ 不是随机变量、正态分布或者其它。）参数 $\tau$  控制了训练样本的权值根据样本点  $x^{(i)}$ 到查询点 $x$ 的距离下降的有多快；参数 $\tau$  被成为 **带宽（bandwidth）** 参数。  
 
@@ -270,13 +270,15 @@ $$ w^{(i)}=exp(-\frac {(x^{(i)}-x)^2}{2\tau^2}) $$
 参考最小二乘法，推导一下计算过程：  
 
 $$
-J(\theta) = \frac{1}{2} \sum_{i=1}^{m} w^{(i)} (h_\theta (x^{(i)})-y^{(i)})^2 \\ 
-=\frac{1}{2} (X\theta-\overset{\rightarrow}y)^TW(X\theta-\overset{\rightarrow}y)\\
-=\theta^TX^TWX\theta-\theta^TX^TW\overset{\rightarrow}y-\overset{\rightarrow}y^TWX\theta+\overset{\rightarrow}y^TW\overset{\rightarrow}y
+\begin{equation}\begin{split} 
+J(\theta) &= \frac{1}{2} \sum_{i=1}^{m} w^{(i)} (h_\theta (x^{(i)})-y^{(i)})^2 \\ 
+&=\frac{1}{2} (X\theta-\overset{\rightarrow}y)^TW(X\theta-\overset{\rightarrow}y)\\
+&=\theta^TX^TWX\theta-\theta^TX^TW\overset{\rightarrow}y-\overset{\rightarrow}y^TWX\theta+\overset{\rightarrow}y^TW\overset{\rightarrow}y
+\end{split}\end{equation}
 $$
 
 
- $ J(\theta) $对 $\theta$ 求导与上面步骤类似，得到结果为：  
+ $ J(\theta) ​$对 $\theta​$ 求导与上面步骤类似，得到结果为：  
 
 $$\nabla_\theta J(\theta) = X^TWX\theta -X^TW\overset{\rightarrow}y$$
 
