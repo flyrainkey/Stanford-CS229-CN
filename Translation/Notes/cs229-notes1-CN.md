@@ -27,7 +27,7 @@ permalink: /translation/cs229-notes1-cn
 
 给出的数据就像上面这样，那么我们要如何学习一个**函数（function）**，来根据居住面积的大小**预测（predict）**在波特兰地区其它房屋的价格呢？
 
-在这里我们先规定一下**符号（notation）**和**定义（definition）**，它们在将来还会用到。我们将使用 $ x^{(i)} $ 来表示 “**输入（input）”** 变量（在这个例子中就是房屋的面积），这也被称作输入的**特征（feature）**。使用 $ y^{(i)} $ 来表示 “**输出（output）**” 或者 **目标（target）** 变量，即是我们想要去预测的值（这个例子中是指价格）。我们用来学习的数据集——含有$ m $个训练样本 $ \{(x^{(i)},y^{(i)});i=1,...,m\} $ 的列表——被称作是**训练集（training set）**。注意上标 “ $ (i) $ “ 在符号表示中只是训练集的  **索引（index）** 记号，与数学中的求幂无关。另外我们使用 $ \cal X $ 来表示输入值的空间，使用 $ \cal Y $ 来表示输出值的空间。在这个例子中，输入和输出空间都是实数域，即 $ \cal X = \cal Y = \mathbb R $ .
+在这里我们先规定一下**符号（notation）**和**定义（definition）**，它们在将来还会用到。我们将使用 $ x^{(i)} $ 来表示 “**输入（input）”** 变量（在这个例子中就是房屋的面积），这也被称作输入的**特征（feature）**。使用 $ y^{(i)} $ 来表示 “**输出（output）**” 或者 **目标（target）** 变量，即是我们想要去预测的值（这个例子中是指价格）。我们用来学习的数据集——含有$ m $个训练样本 $ \{ (x^{(i)},y^{(i)});i=1,...,m \} $ 的列表——被称作是**训练集（training set）**。注意上标 “ $ (i) $ “ 在符号表示中只是训练集的  **索引（index）** 记号，与数学中的求幂无关。另外我们使用 $ \cal X $ 来表示输入值的空间，使用 $ \cal Y $ 来表示输出值的空间。在这个例子中，输入和输出空间都是实数域，即 $ \cal X = \cal Y = \mathbb R $ .
 
 接下来对监督学习问题给出一个更加正式的描述：我们的目标是，给定一个训练集，学习一个函数 $h:\cal X \mapsto \cal Y $ ，使得 $h(x)$ 对于 $y$ 的真实值而言是一个 ”好的（good）“ 预测结果。由于历史原因，函数 $h$ 被称为 **假设（hypothesis）**。从图片上看，整个过程是是这样的：  
 
@@ -121,7 +121,7 @@ $$ \theta_j:=\theta_j +\alpha (y^{(i)}-h_\theta(x^{(i)}))x_j^{(i)} $$
 
 因此，这个梯度  $ \nabla_A f(A)  $ 本身也是一个 $m \times n$ 的矩阵，其中的第 $(i,j)$ 个元素是 $\partial f/ \partial A_{ij}$。举个例子，假如
 
-![](../../assets/image/notes1-A-example.jpg)
+![A](../../assets/image/notes1-A-example.jpg)
 
 是一个 $2 \times 2​$ 矩阵，然后给定的函数 $ f:\mathbb R^{2\times 2} \mapsto \mathbb R ​$ 为：
 
@@ -129,7 +129,7 @@ $$ f(A) = \frac {3}{2}A_{11}+5A_{12}^2+A_{21}A_{22} $$
 
 这里的 $ A_{ij} $ 表示的意思是矩阵 $A$ 的第 $(i,j)$ 个元素，于是就有了梯度：
 
-![](../../assets/image/notes1-A-gd.jpg)
+![fA](../../assets/image/notes1-A-gd.jpg)
 
 接下来我们还要引入 **trace** 求迹运算，简写为 **tr**。对于一个给定的 $n \times n$ 的方阵$A$，它的迹定义为主对角线上元素之和：
 
@@ -151,7 +151,7 @@ $$ tr(A+B)=trA+trB $$
 
 $$ tr aA = a tr A$$
 
-接下来我们在不进行证明的情况下提出一些矩阵微风（其中一些直到本节末尾才用得上）。另外要注意等式（4）$A$ 必须是非奇异方形矩阵（non-singular square matrices），而 $|A|$ 表示的是矩阵 $A$ 的行列式。那么我们就有下面这些等量关系：
+接下来我们在不进行证明的情况下提出一些矩阵微分（其中一些直到本节末尾才用得上）。另外要注意等式（4）$A$ 必须是非奇异方形矩阵（non-singular square matrices），而 $ \mid A \mid $ 表示的是矩阵 $ A $ 的行列式。那么我们就有下面这些等量关系：  
 
 ![matrix-facts](../../assets/image/notes1-matrix-facts.jpg)
 
@@ -175,19 +175,19 @@ $$ tr aA = a tr A$$
 
 现在，由于 $h_\theta(x^{(i)})=(x^{(i)})^T \theta$ ，我们可以很容易地证明：  
 
-![](../../assets/image/notes1-xtheta-y.jpg)
+![xtheta-minus-y](../../assets/image/notes1-xtheta-y.jpg)
 
 而利用对于向量 $z$ 的性质，我们知道 $z^Tz=\sum_i z_i^2$ ，因此有：  
 
-![](../../assets/image/notes1-vector.jpg)
+![zz](../../assets/image/notes1-vector.jpg)
 
 我们的最终目的是使 $J$ 最小，接下来需要找到它关于 $\theta$ 的导数。联合前面的 (2) 和 (3) 式子，我们可以得到：  
 
-![](../../assets/image/notes1-equation-5.jpg)
+![trABAC](../../assets/image/notes1-equation-5.jpg)
 
 所以：  
 
-![](../../assets/image/notes1-key-step.jpg)
+![final-equation](../../assets/image/notes1-key-step.jpg)
 
 在上面推导过程的第三步中，我们用到了一个定理，即一个实数的迹是它本身；第四步用到了 $trA=trA^T$ 这个定理，最后一项不含 $\theta$ 求导时可舍去；第五步使用了等式 (5) ，令 $A^T=\theta, B=B^T=X^TX, C=I$ ，以及等式 (1) ，即 $\nabla_A trAB = \nabla_A trBA=B^T$ 。为了最小化 $J$ ，我们令导数为0，就得到了它的 **正规方程（normal equations）** ：  
 
@@ -219,11 +219,11 @@ $$p(y^{(i)}\mid x^{(i)};\theta)=\frac{1}{\sqrt {2\pi}\sigma} exp(- \frac {(y^{(i
 
 给定设计矩阵$ X​$ （包含了所有的 $x^{(i)}​$）和 $\theta​$， 那么$y^{(i)}​$ 的分布是什么？数据的概率以 $p(\overset{\rightarrow}y \mid X;\theta)​$ 的形式给出。当 $\theta​$ 取固定值的时候，这经常被看作是一个关于 $\overset{\rightarrow}y​$ （或者是 $X​$ ）的函数。当我们想要显式地把它看做一个关于 $\theta​$  的函数时，我们称之为 **似然（likelihood）** 函数：  
 
-![](../../assets/image/notes1-likelihood.jpg)
+![likelihood](../../assets/image/notes1-likelihood.jpg)
 
 结合之前对 $ε^{(i)}$ 的独立性假设 （这里对 $y^{(i)}$ 以及给定的 $x^{(i)}$ 也都做同样假设），就可以把上面这个等式改写成下面的形式：
 
-![](../../assets/image/notes1-likelihood-2.jpg)
+![likelihood-2](../../assets/image/notes1-likelihood-2.jpg)
 
 现在，给定了 $y^{(i)}$ 和 $x^{(i)}$ 之间关系的概率模型了，用什么方法来达到我们对参数 $\theta$ 的最佳猜测呢？ **极大似然（maximum likelihood）** 的思想是选择能让数据的似然函数尽可能大的 $\theta $。也就是说，我们找的 $\theta$ 能够让函数 $L(θ)$ 取到最大值。  
 
@@ -241,7 +241,7 @@ $$ \frac {1}{2} \sum_{i=1}^{m} {(h_\theta(x^{(i)})-y^{(i)})^2} $$
 
 不妨假设我们的问题是从 $x \in \mathbb R $ 来预测 $y$ 。下图最左侧的图像展示了使用 $y=\theta_0+\theta_1x$ 拟合一个数据集的情况。我们可以发现数据实际上并没有完全位于直线上，因此拟合的效果并不是很好。  
 
-![](../../assets/image/notes1-fit.jpg)
+![3-fit-model](../../assets/image/notes1-fit.jpg)
 
 取代原来的方法，如果我们加上一个额外的特征 $x^2$，并用 $y=\theta_0+\theta_1x+\theta_2x^2$ 来拟合数据，你会发现效果稍微好了那么一点（看中间这幅图片）。似乎可以天真地认为，我们添加的特征越多越好。然而，添加的特征太多也是很危险的：最右边的图像是使用一个五次多项式 $y=\sum^5_{j=0}\theta_jx^j$ 来拟合数据的结果。我们看到，即使拟合曲线完美地穿过数据，我们也无法确定这就是一个相当好的预测，能够针对不同生活地区 $(x)$ 来预测房价 $(y)$ 。在还没有正式地定义这些术语之前，我们可以说最左侧的图像展示的是一种 **欠拟合（underfitting）** 的实例 —— 很明显看出模型未能捕获到数据的结构 —— 最右侧的图像展示的是一种 **过拟合（overfitting）** 的实例。（在这节课的后面部分，当我们谈到学习理论的时候，我们将把这些概念形式化，并更仔细地去定义一个假设是好的还是坏的。）  
 
@@ -267,7 +267,7 @@ $$ w^{(i)}=exp(-\frac {(x^{(i)}-x)^2}{2\tau^2}) $$
 
 注意，权重取决于特定的点 $x$， 而我们又尝试去预测 $x$。此外，如果 $\mid x^{(i)}-x \mid$ 很小，那么 $w^{(i)}$ 将接近 1；如果 $\mid x^{(i)}-x \mid$ 很大，那么 $w^{(i)}$ 将非常小。其直观意义就是越是靠近预测点的样本点，它们对预测点的影响就应该越大，越是远离预测点的样本点，它们对预测点的影响就越小，也就是说**局部加权线性回归模型**只关注于预测点附近的点（这就是局部的含义），而不考虑其他远离预测点的样本点。（注意，权值公式看上去类似于高斯分布的密度，但 $w^{(i)}$ 和高斯分布没有任何关系，尤其注意 $w^{(i)}$ 不是随机变量、正态分布或者其它。）参数 $\tau$  控制了训练样本的权值根据样本点  $x^{(i)}$ 到查询点 $x$ 的距离下降的有多快；参数 $\tau$  被成为 **带宽（bandwidth）** 参数。  
 
-![](../../assets/image/notes1-tau-weight.jpg)
+![weight-function](../../assets/image/notes1-tau-weight.jpg)
 
 参考最小二乘法，推导一下计算过程：  
 
@@ -276,7 +276,9 @@ J(\theta) = \frac{1}{2} \sum_{i=1}^{m} w^{(i)} (h_\theta (x^{(i)})-y^{(i)})^2 \\
 =\frac{1}{2} (X\theta-\overset{\rightarrow}y)^TW(X\theta-\overset{\rightarrow}y)\\
 =\theta^TX^TWX\theta-\theta^TX^TW\overset{\rightarrow}y-\overset{\rightarrow}y^TWX\theta+\overset{\rightarrow}y^TW\overset{\rightarrow}y
 $$
-$J(\theta)$对 $\theta$ 求导与上面步骤类似，得到结果为：  
+
+
+ $ J(\theta) $对 $\theta$ 求导与上面步骤类似，得到结果为：  
 
 $$\nabla_\theta J(\theta) = X^TWX\theta -X^TW\overset{\rightarrow}y$$
 
@@ -286,4 +288,4 @@ $$  \theta = (X^TWX)^{-1}X^TW\overset{\rightarrow}y $$
 
 其中，$W$ 是 $m\times m$ 维的对角矩阵，对角线依次存放 $w^{(i)}$ .     
 
-局部加权线性回归是我们接触的第一个 **非参数（non-parametric）** 算法。之前学习的（不带权）线性回归算法是有 **参数（parametric）** 算法，因为它有固定的有限数量的，能够很好拟合数据的参数（$\theta$）。一旦我们拟合出 $\theta $ 并存储了下来，也就不需要再保留训练数据样本来进行更进一步的预测了。相比而言，用局部加权线性回归做预测，我们需要保留整个的训练数据，每次预测得到不同的参数 $\theta $ ，即参数不是固定的。术语 “非参数” 粗略意味着：我们需要保留用来代表假设 $h$ 的内容，随着训练集的规模变化是呈线性增长的。
+局部加权线性回归是我们接触的第一个 **非参数（non-parametric）** 算法。之前学习的（不带权）线性回归算法是有 **参数（parametric）** 算法，因为它有固定的有限数量的，能够很好拟合数据的参数（$\theta​$）。一旦我们拟合出 $\theta ​$ 并存储了下来，也就不需要再保留训练数据样本来进行更进一步的预测了。相比而言，用局部加权线性回归做预测，我们需要保留整个的训练数据，每次预测得到不同的参数 $\theta ​$ ，即参数不是固定的。术语 “非参数” 粗略意味着：我们需要保留用来代表假设 $h​$ 的内容，随着训练集的规模变化是呈线性增长的。

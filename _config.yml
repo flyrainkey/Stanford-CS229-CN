@@ -1,9 +1,9 @@
 # Site settings
-title: CS229 Machine Learning CN
+title: CS229 Machine Learning Notes Chinese Edition
 email: acdoge.cao@gmail.com
 description: "CS229 Notes Chinese Edition"
-baseurl: ""
-url: "/Stanford-CS229-CN"
+baseurl: "/Stanford-CS229-CN"
+url: 
 
 # Build settings
 markdown: kramdown
