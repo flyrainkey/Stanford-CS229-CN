@@ -1,9 +1,7 @@
 ---
 layout: page
-permalink: /translation/cs229-notes1-cn
+permalink: translation/cs229-notes1-cn
 ---
-
-
 
 原文：http://cs229.stanford.edu/notes/cs229-notes1.pdf  
 翻译：[MIL Learning Group](https://github.com/milLearningGroup/Stanford-CS229-CN) - [AcceptedDoge](https://github.com/AcceptedDoge)
