@@ -1,3 +1,5 @@
+原文：http://cs229.stanford.edu/notes/cs229-notes5.pdf  
+翻译：[MIL Learning Group](https://github.com/milLearningGroup/Stanford-CS229-CN) - [BoyaYang](https://github.com/BoyaYang)
 ## Part VII 正则化和模型选择(Regularization and model selection)
 
 假定我们试图为一个学习问题从多个不同的模型进行选择.例如,我们可能使用一个多项式回归模型$h_{\theta}(X)=g(\theta_{0}+\theta_{1}x+\theta{2}x^{2}+\cdots+\theta_{k}x^{k})$,并希望决定k应该取$0,1,\dots,10$中的哪一个.应该如何自动选择一个
